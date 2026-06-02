@@ -1,0 +1,404 @@
+/* ==================================================
+   ZERO FRAME — NAVIGATION SYSTEM
+   Phase 5: Desktop Sidebar + Mobile Hamburger + Drawer + Accessibility
+   ================================================== */
+
+/* ============================================
+   TASK 5.1 — DESKTOP SIDEBAR
+   ============================================ */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    z-index: var(--z-drawer);
+    background: var(--color-black);
+    border-right: 1px solid var(--color-white);
+}
+
+.sidebar__nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    gap: var(--space-8);
+}
+
+.sidebar__link {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: var(--font-size-sm);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--color-white);
+    text-decoration: none;
+    transition: opacity var(--duration-fast) var(--ease-out);
+    padding: var(--space-4) 0;
+}
+
+.sidebar__link:hover {
+    opacity: 0.6;
+}
+
+.sidebar__link.active {
+    opacity: 1;
+    position: relative;
+}
+
+.sidebar__link.active::before {
+    content: '●';
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: var(--font-size-xs);
+    opacity: 1;
+}
+
+/* Sidebar on right side (optional) */
+.sidebar--right {
+    left: auto;
+    right: 0;
+    border-right: none;
+    border-left: 1px solid var(--color-white);
+}
+
+.sidebar--right .sidebar__link.active::before {
+    left: auto;
+    right: -8px;
+}
+
+/* Sidebar with logo */
+.sidebar--with-logo .sidebar__nav {
+    justify-content: space-between;
+    padding: var(--space-lg) 0;
+}
+
+.sidebar__logo {
+    writing-mode: horizontal-tb;
+    font-family: 'Anton', sans-serif;
+    font-size: var(--font-size-sm);
+    transform: rotate(-90deg);
+    white-space: nowrap;
+}
+
+/* ============================================
+   TASK 5.2 — MOBILE HAMBURGER
+   ============================================ */
+
+.menu-trigger {
+    display: none;
+    position: fixed;
+    top: var(--space-md);
+    right: var(--space-md);
+    width: 48px;
+    height: 48px;
+    z-index: var(--z-modal);
+    background: var(--color-black);
+    border: 1px solid var(--color-white);
+    border-radius: var(--radius-none);
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    transition: background var(--duration-fast) var(--ease-out);
+}
+
+.menu-trigger:hover {
+    background: var(--color-white-10);
+}
+
+.menu-trigger:focus-visible {
+    outline: 2px solid var(--color-white);
+    outline-offset: 2px;
+}
+
+.menu-trigger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--color-white);
+    transition: transform var(--duration-fast) var(--ease-out),
+                opacity var(--duration-fast) var(--ease-out);
+}
+
+/* Hamburger animation to X */
+.menu-trigger[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menu-trigger[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.menu-trigger[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ============================================
+   TASK 5.3 — MOBILE DRAWER
+   ============================================ */
+
+.mobile-drawer {
+    position: fixed;
+    inset: 0;
+    background: var(--color-black);
+    z-index: var(--z-modal);
+    transform: translateX(100%);
+    transition: transform var(--duration-base) var(--ease-out);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-9);
+    visibility: hidden;
+}
+
+.mobile-drawer.is-open {
+    transform: translateX(0);
+    visibility: visible;
+}
+
+.mobile-drawer__nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-7);
+}
+
+.mobile-drawer__link {
+    font-family: 'Anton', sans-serif;
+    font-size: var(--font-size-4xl);
+    text-decoration: none;
+    color: var(--color-white);
+    text-transform: uppercase;
+    transition: opacity var(--duration-fast) var(--ease-out);
+    opacity: 0.7;
+}
+
+.mobile-drawer__link:hover,
+.mobile-drawer__link:focus-visible {
+    opacity: 1;
+}
+
+.mobile-drawer__link.active {
+    opacity: 1;
+    text-decoration: underline;
+    text-underline-offset: var(--space-3);
+}
+
+/* Drawer footer */
+.mobile-drawer__footer {
+    position: absolute;
+    bottom: var(--space-lg);
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: var(--font-size-xs);
+    opacity: 0.5;
+}
+
+/* ============================================
+   TASK 5.4 — FOCUS TRAP
+   ============================================ */
+
+/* Focus trap container */
+.focus-trap {
+    outline: none;
+}
+
+/* Focus trap active state */
+.focus-trap-active {
+    overflow: hidden;
+}
+
+/* Focusable elements inside drawer */
+.mobile-drawer a,
+.mobile-drawer button {
+    position: relative;
+}
+
+/* Focus visible styles */
+.mobile-drawer a:focus-visible,
+.mobile-drawer button:focus-visible {
+    outline: 2px solid var(--color-white);
+    outline-offset: 8px;
+}
+
+/* Backdrop for mobile drawer */
+.drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: var(--color-black-80);
+    z-index: calc(var(--z-modal) - 1);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--duration-base) var(--ease-out);
+}
+
+.drawer-backdrop.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ============================================
+   TASK 5.5 & 5.6 — ESC CLOSE + BODY SCROLL LOCK
+   ============================================ */
+
+/* Body scroll lock class */
+.body-scroll-lock {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+/* Prevent scroll on mobile when drawer is open */
+@media (max-width: 768px) {
+    body.drawer-open {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+    }
+}
+
+/* ============================================
+   RESPONSIVE BEHAVIOR
+   ============================================ */
+
+/* Hide sidebar on mobile, show hamburger */
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+    
+    .menu-trigger {
+        display: flex;
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+}
+
+/* Adjust drawer links for smaller screens */
+@media (max-width: 640px) {
+    .mobile-drawer__link {
+        font-size: var(--font-size-3xl);
+    }
+}
+
+@media (max-width: 480px) {
+    .mobile-drawer__link {
+        font-size: var(--font-size-2xl);
+    }
+}
+
+/* ============================================
+   TASK 5.7 — KEYBOARD NAVIGATION TESTING
+   ============================================ */
+
+/* Keyboard navigation indicators */
+.keyboard-nav-indicator {
+    position: fixed;
+    bottom: var(--space-sm);
+    right: var(--space-sm);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: var(--font-size-xs);
+    background: var(--color-black-80);
+    padding: var(--space-2) var(--space-3);
+    z-index: 9999;
+    pointer-events: none;
+    border-radius: var(--radius-sm);
+    opacity: 0;
+    transition: opacity var(--duration-fast);
+}
+
+.keyboard-nav-indicator.visible {
+    opacity: 1;
+}
+
+/* High contrast focus for keyboard users */
+:focus-visible {
+    outline: 3px solid var(--color-white);
+    outline-offset: 4px;
+}
+
+/* Skip to content link */
+.skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-white);
+    color: var(--color-black);
+    padding: var(--space-sm) var(--space-md);
+    z-index: 10000;
+    text-decoration: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: var(--font-size-sm);
+}
+
+.skip-to-content:focus-visible {
+    top: 0;
+}
+
+/* ============================================
+   ADDITIONAL NAVIGATION STYLES
+   ============================================ */
+
+/* Breadcrumbs (optional) */
+.breadcrumbs {
+    display: flex;
+    gap: var(--space-3);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: var(--font-size-xs);
+    padding: var(--space-md) 0;
+}
+
+.breadcrumbs__item {
+    color: var(--color-white-70);
+}
+
+.breadcrumbs__item--active {
+    color: var(--color-white);
+}
+
+.breadcrumbs__separator {
+    color: var(--color-white-30);
+}
+
+/* Pagination (optional) */
+.pagination {
+    display: flex;
+    gap: var(--space-2);
+    justify-content: center;
+    margin-top: var(--space-xl);
+}
+
+.pagination__link {
+    padding: var(--space-2) var(--space-3);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: var(--font-size-sm);
+    border: 1px solid var(--color-white-30);
+    transition: all var(--duration-fast);
+}
+
+.pagination__link:hover,
+.pagination__link:focus-visible {
+    background: var(--color-white);
+    color: var(--color-black);
+    border-color: var(--color-white);
+}
+
+.pagination__link.active {
+    background: var(--color-white);
+    color: var(--color-black);
+    border-color: var(--color-white);
+}

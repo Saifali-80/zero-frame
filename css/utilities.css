@@ -1,0 +1,173 @@
+/* UTILITIES */
+
+/* Spacing */
+.u-m-0 { margin: 0; }
+.u-mt-xs { margin-top: var(--space-xs); }
+.u-mt-sm { margin-top: var(--space-sm); }
+.u-mt-md { margin-top: var(--space-md); }
+.u-mt-lg { margin-top: var(--space-lg); }
+.u-mt-xl { margin-top: var(--space-xl); }
+
+.u-mb-xs { margin-bottom: var(--space-xs); }
+.u-mb-sm { margin-bottom: var(--space-sm); }
+.u-mb-md { margin-bottom: var(--space-md); }
+.u-mb-lg { margin-bottom: var(--space-lg); }
+.u-mb-xl { margin-bottom: var(--space-xl); }
+
+.u-p-xs { padding: var(--space-xs); }
+.u-p-sm { padding: var(--space-sm); }
+.u-p-md { padding: var(--space-md); }
+.u-p-lg { padding: var(--space-lg); }
+.u-p-xl { padding: var(--space-xl); }
+
+/* Text */
+.u-text-center { text-align: center; }
+.u-text-right { text-align: right; }
+.u-text-left { text-align: left; }
+
+.u-uppercase { text-transform: uppercase; }
+.u-lowercase { text-transform: lowercase; }
+
+/* Display */
+.u-hidden { display: none; }
+.u-block { display: block; }
+.u-flex { display: flex; }
+.u-grid { display: grid; }
+
+/* Position */
+.u-relative { position: relative; }
+.u-absolute { position: absolute; }
+.u-fixed { position: fixed; }
+.u-sticky { position: sticky; }
+
+/* Reveal Animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--duration-slow) var(--ease-out),
+              transform var(--duration-slow) var(--ease-out);
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-24px);
+  transition: opacity var(--duration-slow) var(--ease-out),
+              transform var(--duration-slow) var(--ease-out);
+}
+
+.reveal-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(24px);
+  transition: opacity var(--duration-slow) var(--ease-out),
+              transform var(--duration-slow) var(--ease-out);
+}
+
+.reveal-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger Children */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--duration-slow) var(--ease-out),
+              transform var(--duration-slow) var(--ease-out);
+}
+
+.reveal-stagger.revealed > *:nth-child(1) {
+  transition-delay: 0.05s;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger.revealed > *:nth-child(2) {
+  transition-delay: 0.1s;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger.revealed > *:nth-child(3) {
+  transition-delay: 0.15s;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger.revealed > *:nth-child(4) {
+  transition-delay: 0.2s;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger.revealed > *:nth-child(5) {
+  transition-delay: 0.25s;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger.revealed > *:nth-child(6) {
+  transition-delay: 0.3s;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-stagger > * {
+    transition: none;
+  }
+
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-stagger > *,
+  .reveal-stagger.revealed > * {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0s;
+  }
+}
+
+/* Focus Visible */
+:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 4px;
+}
+
+/* Skip Link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-white);
+  color: var(--color-black);
+  padding: var(--space-sm) var(--space-md);
+  z-index: 1000;
+  text-decoration: none;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: var(--font-size-meta);
+}
+
+.skip-link:focus-visible {
+  top: 0;
+}
+
+/* Container Queries Ready */
+@container (max-width: 600px) {
+  .responsive-stack {
+    flex-direction: column;
+  }
+}

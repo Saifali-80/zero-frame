@@ -1,0 +1,313 @@
+/* ==================================================
+   ZERO FRAME — MOTION FOUNDATION
+   Phase 6: Animation Classes + Reveals + Stagger + Transitions
+   ================================================== */
+
+/* ============================================
+   Base Reveal Animations
+   ============================================ */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+                transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Left Reveal */
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+                transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+.reveal-left.revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Right Reveal */
+.reveal-right {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+                transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+.reveal-right.revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Scale Reveal */
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+                transform 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+.reveal-scale.revealed {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Blur Reveal */
+.reveal-blur {
+    opacity: 0;
+    filter: blur(10px);
+    transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+                filter 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+.reveal-blur.revealed {
+    opacity: 1;
+    filter: blur(0);
+}
+
+/* ============================================
+   Stagger Children
+   ============================================ */
+
+.stagger-children > *,
+.reveal-stagger > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+                transform 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+.stagger-children.revealed > *,
+.reveal-stagger.revealed > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger delays */
+.stagger-children.revealed > *:nth-child(1),
+.reveal-stagger.revealed > *:nth-child(1) { transition-delay: 0.05s; }
+.stagger-children.revealed > *:nth-child(2),
+.reveal-stagger.revealed > *:nth-child(2) { transition-delay: 0.10s; }
+.stagger-children.revealed > *:nth-child(3),
+.reveal-stagger.revealed > *:nth-child(3) { transition-delay: 0.15s; }
+.stagger-children.revealed > *:nth-child(4),
+.reveal-stagger.revealed > *:nth-child(4) { transition-delay: 0.20s; }
+.stagger-children.revealed > *:nth-child(5),
+.reveal-stagger.revealed > *:nth-child(5) { transition-delay: 0.25s; }
+.stagger-children.revealed > *:nth-child(6),
+.reveal-stagger.revealed > *:nth-child(6) { transition-delay: 0.30s; }
+.stagger-children.revealed > *:nth-child(7),
+.reveal-stagger.revealed > *:nth-child(7) { transition-delay: 0.35s; }
+.stagger-children.revealed > *:nth-child(8),
+.reveal-stagger.revealed > *:nth-child(8) { transition-delay: 0.40s; }
+
+/* ============================================
+   Fade Animations
+   ============================================ */
+
+.fade-in {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
+
+.fade-in.revealed {
+    opacity: 1;
+}
+
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out,
+                transform 0.5s ease-out;
+}
+
+.fade-in-up.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-in-down {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease-out,
+                transform 0.5s ease-out;
+}
+
+.fade-in-down.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================
+   Slide Animations
+   ============================================ */
+
+.slide-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+                transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+.slide-up.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide-down {
+    opacity: 0;
+    transform: translateY(-40px);
+    transition: opacity 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+                transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+.slide-down.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================
+   Hero Kinetic Typography
+   ============================================ */
+
+@keyframes kineticReveal {
+    0% {
+        letter-spacing: -0.05em;
+        transform: scale(0.96);
+        opacity: 0;
+    }
+    40% {
+        letter-spacing: -0.03em;
+    }
+    100% {
+        letter-spacing: -0.02em;
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.kinetic {
+    animation: kineticReveal 0.7s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+}
+
+.kinetic-delayed {
+    animation: kineticReveal 0.7s cubic-bezier(0.34, 1.2, 0.64, 1) 0.2s forwards;
+    opacity: 0;
+}
+
+/* ============================================
+   Hover Animations
+   ============================================ */
+
+.hover-lift {
+    transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+}
+
+.hover-glow {
+    transition: opacity 0.2s ease;
+}
+
+.hover-glow:hover {
+    opacity: 0.7;
+}
+
+.hover-scale {
+    transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.02);
+}
+
+/* ============================================
+   Loading Animations
+   ============================================ */
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.loading-pulse {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-spin {
+    animation: spin 1s linear infinite;
+}
+
+/* ============================================
+   Page Transition
+   ============================================ */
+
+.page-transition {
+    animation: pageFadeIn 0.5s ease-out;
+}
+
+@keyframes pageFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   Reduced Motion Support
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .reveal-left,
+    .reveal-right,
+    .reveal-scale,
+    .reveal-blur,
+    .stagger-children > *,
+    .reveal-stagger > *,
+    .fade-in,
+    .fade-in-up,
+    .fade-in-down,
+    .slide-up,
+    .slide-down,
+    .hover-lift,
+    .hover-scale,
+    .kinetic,
+    .kinetic-delayed {
+        animation: none !important;
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+    }
+    
+    .loading-pulse,
+    .loading-spin {
+        animation: none !important;
+    }
+}

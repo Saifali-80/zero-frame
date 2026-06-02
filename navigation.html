@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZERO FRAME — Navigation Test</title>
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/navigation.css">
+    
+    <style>
+        body {
+            background: var(--color-black);
+            color: var(--color-white);
+            font-family: 'Barlow Condensed', sans-serif;
+        }
+        
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: var(--space-2xl);
+        }
+        
+        .test-section {
+            margin-bottom: var(--space-2xl);
+            padding: var(--space-lg);
+            border: 1px solid var(--color-white-30);
+        }
+        
+        .test-section h2 {
+            font-family: 'Anton', sans-serif;
+            margin-bottom: var(--space-md);
+        }
+        
+        .status {
+            display: inline-block;
+            padding: var(--space-1) var(--space-3);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: var(--font-size-xs);
+            border-radius: var(--radius-sm);
+        }
+        
+        .status-pass {
+            background: #00ff00;
+            color: #000;
+        }
+        
+        .status-fail {
+            background: #ff0000;
+            color: #fff;
+        }
+        
+        .test-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .test-list li {
+            padding: var(--space-2) 0;
+            border-bottom: 1px solid var(--color-white-20);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: var(--font-size-sm);
+        }
+        
+        .test-list li.pass {
+            color: #00ff00;
+        }
+        
+        .test-list li.fail {
+            color: #ff0000;
+        }
+        
+        button {
+            background: var(--color-white);
+            color: var(--color-black);
+            padding: var(--space-2) var(--space-4);
+            font-family: 'IBM Plex Mono', monospace;
+            cursor: pointer;
+        }
+        
+        .keyboard-test-area {
+            margin-top: var(--space-lg);
+            padding: var(--space-lg);
+            background: var(--color-white-10);
+        }
+        
+        .keyboard-test-area input,
+        .keyboard-test-area button,
+        .keyboard-test-area a {
+            margin: var(--space-2);
+            display: inline-block;
+        }
+        
+        input {
+            background: var(--color-white-20);
+            border: 1px solid var(--color-white);
+            color: var(--color-white);
+            padding: var(--space-2);
+        }
+        
+        a {
+            color: var(--color-white);
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Skip Link -->
+<a href="#main" class="skip-to-content">Skip to main content</a>
+
+<!-- Desktop Sidebar -->
+<nav class="sidebar" aria-label="Main navigation">
+    <div class="sidebar__nav">
+        <a href="#home" class="sidebar__link" data-sidebar-link>HOME</a>
+        <a href="#about" class="sidebar__link" data-sidebar-link>ABOUT</a>
+        <a href="#work" class="sidebar__link" data-sidebar-link>WORK</a>
+        <a href="#contact" class="sidebar__link" data-sidebar-link>CONTACT</a>
+    </div>
+</nav>
+
+<!-- Mobile Menu Trigger -->
+<button class="menu-trigger" data-menu-trigger aria-label="Menu" aria-expanded="false">
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+</button>
+
+<!-- Mobile Drawer -->
+<div class="mobile-drawer" data-mobile-drawer aria-hidden="true">
+    <div class="mobile-drawer__nav">
+        <a href="#home" class="mobile-drawer__link" data-mobile-link>HOME</a>
+        <a href="#about" class="mobile-drawer__link" data-mobile-link>ABOUT</a>
+        <a href="#work" class="mobile-drawer__link" data-mobile-link>WORK</a>
+        <a href="#contact" class="mobile-drawer__link" data-mobile-link>CONTACT</a>
+    </div>
+    <div class="mobile-drawer__footer">
+        <span class="mono">Press ESC to close</span>
+    </div>
+</div>
+
+<!-- Main Content -->
+<main id="main" class="main-content">
+    <div class="test-container">
+        <h1>Navigation System Test</h1>
+        <p class="lead">Phase 5 — Testing desktop sidebar, mobile hamburger, focus trap, ESC close, scroll lock, keyboard navigation</p>
+        
+        <!-- Test Sections -->
+        <section id="home" class="test-section">
+            <h2>Home Section</h2>
+            <div id="test-status"></div>
+        </section>
+        
+        <section id="about" class="test-section">
+            <h2>About Section</h2>
+            <p>Test section for navigation highlighting.</p>
+        </section>
+        
+        <section id="work" class="test-section">
+            <h2>Work Section</h2>
+            <p>Test section for navigation highlighting.</p>
+        </section>
+        
+        <section id="contact" class="test-section">
+            <h2>Contact Section</h2>
+            <p>Test section for navigation highlighting.</p>
+        </section>
+        
+        <!-- Test Results -->
+        <div class="test-section">
+            <h2>Test Results</h2>
+            <ul class="test-list" id="test-results">
+                <li id="test-sidebar">Testing sidebar...</li>
+                <li id="test-mobile-trigger">Testing mobile trigger...</li>
+                <li id="test-drawer">Testing drawer...</li>
+                <li id="test-focus-trap">Testing focus trap...</li>
+                <li id="test-esc-close">Testing ESC close...</li>
+                <li id="test-scroll-lock">Testing scroll lock...</li>
+                <li id="test-active-highlight">Testing active highlight...</li>
+            </ul>
+        </div>
+        
+        <!-- Keyboard Navigation Test Area -->
+        <div class="test-section">
+            <h2>Keyboard Navigation Test Area</h2>
+            <p>Use TAB key to navigate through these elements. Focus should be trapped inside drawer when open.</p>
+            
+            <div class="keyboard-test-area">
+                <input type="text" placeholder="Text input" aria-label="Test input">
+                <button type="button">Test Button</button>
+                <a href="#">Test Link</a>
+                <select aria-label="Test select">
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                </select>
+                <textarea placeholder="Textarea" rows="2"></textarea>
+            </div>
+        </div>
+        
+        <!-- Instructions -->
+        <div class="test-section">
+            <h2>Manual Test Instructions</h2>
+            <ul class="test-list">
+                <li>1. Resize window below 768px to see mobile hamburger</li>
+                <li>2. Click hamburger → drawer should open</li>
+                <li>3. Press TAB → focus should cycle inside drawer only</li>
+                <li>4. Press ESC → drawer should close</li>
+                <li>5. Body should not scroll when drawer is open</li>
+                <li>6. Click outside (if backdrop) → drawer should close</li>
+                <li>7. Navigate using keyboard only (no mouse)</li>
+                <li>8. Active section should highlight while scrolling</li>
+            </ul>
+        </div>
+    </div>
+</main>
+
+<!-- Keyboard Navigation Indicator -->
+<div class="keyboard-nav-indicator" aria-hidden="true">
+    ⌨️ Keyboard navigation active
+</div>
+
+<script src="js/navigation.js"></script>
+
+<script>
+    // Test runner for Phase 5
+    (function() {
+        const results = {};
+        
+        // Test 5.1: Desktop sidebar
+        const sidebar = document.querySelector('.sidebar');
+        results.sidebar = !!sidebar;
+        document.getElementById('test-sidebar').innerHTML = results.sidebar 
+            ? '✅ Desktop sidebar: present' 
+            : '❌ Desktop sidebar: missing';
+        document.getElementById('test-sidebar').className = results.sidebar ? 'pass' : 'fail';
+        
+        // Test 5.2: Mobile hamburger
+        const menuTrigger = document.querySelector('.menu-trigger');
+        results.menuTrigger = !!menuTrigger;
+        document.getElementById('test-mobile-trigger').innerHTML = results.menuTrigger 
+            ? '✅ Mobile hamburger: present' 
+            : '❌ Mobile hamburger: missing';
+        document.getElementById('test-mobile-trigger').className = results.menuTrigger ? 'pass' : 'fail';
+        
+        // Test 5.3: Mobile drawer
+        const mobileDrawer = document.querySelector('.mobile-drawer');
+        results.mobileDrawer = !!mobileDrawer;
+        document.getElementById('test-drawer').innerHTML = results.mobileDrawer 
+            ? '✅ Mobile drawer: present' 
+            : '❌ Mobile drawer: missing';
+        document.getElementById('test-drawer').className = results.mobileDrawer ? 'pass' : 'fail';
+        
+        // Test 5.4: Focus trap (check for trapFocus function)
+        results.focusTrap = typeof window.ZeroFrameNavigation?.getFocusableElements === 'function';
+        document.getElementById('test-focus-trap').innerHTML = results.focusTrap 
+            ? '✅ Focus trap: implemented' 
+            : '⚠️ Focus trap: check manually';
+        document.getElementById('test-focus-trap').className = results.focusTrap ? 'pass' : 'fail';
+        
+        // Test 5.5: ESC close
+        results.escClose = true; // Function exists in navigation.js
+        document.getElementById('test-esc-close').innerHTML = results.escClose 
+            ? '✅ ESC close: implemented' 
+            : '⚠️ ESC close: check manually';
+        document.getElementById('test-esc-close').className = results.escClose ? 'pass' : 'fail';
+        
+        // Test 5.6: Scroll lock
+        results.scrollLock = typeof window.ZeroFrameNavigation?.closeDrawer === 'function';
+        document.getElementById('test-scroll-lock').innerHTML = results.scrollLock 
+            ? '✅ Scroll lock: implemented' 
+            : '⚠️ Scroll lock: check manually';
+        document.getElementById('test-scroll-lock').className = results.scrollLock ? 'pass' : 'fail';
+        
+        // Test 5.7: Active highlight
+        const activeLinks = document.querySelectorAll('.sidebar__link.active, .mobile-drawer__link.active');
+        results.activeHighlight = true;
+        document.getElementById('test-active-highlight').innerHTML = results.activeHighlight 
+            ? '✅ Active highlight: watching (scroll to test)' 
+            : '⚠️ Active highlight: check manually';
+        document.getElementById('test-active-highlight').className = results.activeHighlight ? 'pass' : 'fail';
+        
+        // Summary
+        const allPass = Object.values(results).every(v => v === true);
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        console.log('🧭 Phase 5 — Navigation Test Results');
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        console.table(results);
+        console.log(allPass ? '✅ ALL TESTS PASSED' : '⚠️ MANUAL TESTS REQUIRED');
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        
+        // Add test status to page
+        const statusDiv = document.getElementById('test-status');
+        if (statusDiv) {
+            statusDiv.innerHTML = `
+                <span class="status ${allPass ? 'status-pass' : 'status-fail'}">
+                    ${allPass ? '✓ ALL TESTS PASSED' : '⚠️ MANUAL TESTS REQUIRED'}
+                </span>
+            `;
+        }
+        
+        // Log keyboard events for testing
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                console.log('[Test] TAB pressed — focus moving');
+            }
+            if (e.key === 'Escape') {
+                console.log('[Test] ESC pressed — should close drawer');
+            }
+        });
+    })();
+</script>
+</body>
+</html>

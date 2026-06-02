@@ -1,0 +1,260 @@
+/* ==================================================
+   ZERO FRAME — TYPOGRAPHY SYSTEM
+   Phase 2: Complete Typography Implementation
+   ================================================== */
+
+/* Google Fonts — Single Request */
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@400;700&family=IBM+Plex+Mono:wght@400;700&display=swap');
+
+/* ===== FONT FAMILIES ===== */
+body,
+button,
+input,
+select,
+textarea {
+    font-family: 'Barlow Condensed', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6,
+.anton,
+.font-anton {
+    font-family: 'Anton', sans-serif;
+}
+
+code,
+pre,
+kbd,
+samp,
+.mono,
+.font-mono,
+.ibm-plex-mono {
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+/* ===== HEADING STYLES ===== */
+h1, .h1 {
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--tracking-tighter);
+    text-transform: uppercase;
+    margin-bottom: var(--space-6);
+}
+
+h2, .h2 {
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--tracking-tight);
+    text-transform: uppercase;
+    margin-bottom: var(--space-5);
+}
+
+h3, .h3 {
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-snug);
+    letter-spacing: var(--tracking-tight);
+    margin-bottom: var(--space-4);
+}
+
+h4, .h4 {
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-snug);
+    margin-bottom: var(--space-3);
+}
+
+h5, .h5 {
+    font-size: var(--font-size-h5);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-normal);
+    margin-bottom: var(--space-2);
+}
+
+h6, .h6 {
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    margin-bottom: var(--space-2);
+}
+
+/* ===== BODY TEXT ===== */
+p {
+    margin-bottom: var(--space-5);
+    max-width: 65ch;
+}
+
+.lead {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    font-weight: var(--font-weight-normal);
+    margin-bottom: var(--space-6);
+}
+
+.small {
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-normal);
+}
+
+.meta {
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+}
+
+/* ===== LINKS ===== */
+a {
+    color: var(--color-text);
+    text-decoration: none;
+    transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+/* ===== LISTS ===== */
+ul, ol {
+    margin-bottom: var(--space-5);
+    padding-left: var(--space-6);
+}
+
+li {
+    margin-bottom: var(--space-2);
+    line-height: var(--line-height-normal);
+}
+
+/* Unstyled list */
+.list-none {
+    list-style: none;
+    padding-left: 0;
+}
+
+/* ===== BLOCKQUOTE ===== */
+blockquote {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    border-left: 2px solid var(--color-border);
+    padding-left: var(--space-6);
+    margin: var(--space-8) 0;
+    font-style: normal;
+}
+
+/* ===== CODE ===== */
+code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9em;
+    background: var(--color-white-10);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+}
+
+pre {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-normal);
+    background: var(--color-white-10);
+    padding: var(--space-5);
+    overflow-x: auto;
+    margin: var(--space-6) 0;
+    border-radius: var(--radius-md);
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* ===== HERO TYPOGRAPHY ===== */
+.hero-title {
+    font-family: 'Anton', sans-serif;
+    font-size: var(--font-size-hero);
+    line-height: var(--line-height-none);
+    letter-spacing: var(--tracking-tighter);
+    text-transform: uppercase;
+}
+
+/* ===== SECTION TITLES ===== */
+.section-title {
+    font-family: 'Anton', sans-serif;
+    font-size: var(--font-size-h2);
+    letter-spacing: var(--tracking-tight);
+    margin-bottom: var(--space-12);
+    text-transform: uppercase;
+}
+
+/* ===== LABELS & META ===== */
+.label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: var(--font-size-xs);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-white-70);
+}
+
+/* ===== NUMERALS ===== */
+.numeral {
+    font-family: 'Anton', sans-serif;
+    font-size: var(--font-size-3xl);
+    line-height: var(--line-height-none);
+}
+
+/* ===== CURSIVE / EMPHASIS ===== */
+em, .italic {
+    font-style: italic;
+}
+
+strong, .bold {
+    font-weight: var(--font-weight-bold);
+}
+
+/* ===== TEXT COLORS ===== */
+.text-white { color: var(--color-white); }
+.text-black { color: var(--color-black); }
+.text-white-70 { color: var(--color-white-70); }
+.text-white-50 { color: var(--color-white-50); }
+.text-white-30 { color: var(--color-white-30); }
+
+/* ===== TEXT TRANSFORMS ===== */
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+.capitalize { text-transform: capitalize; }
+
+/* ===== TEXT ALIGNMENT ===== */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+/* ===== TEXT WRAPPING ===== */
+.text-wrap { 
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+.text-nowrap {
+    white-space: nowrap;
+}
+
+/* ===== TRUNCATION ===== */
+.truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ===== SELECTION ===== */
+::selection {
+    background: var(--color-white);
+    color: var(--color-black);
+}
+
+::-moz-selection {
+    background: var(--color-white);
+    color: var(--color-black);
+}

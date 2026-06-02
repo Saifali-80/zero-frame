@@ -1,0 +1,343 @@
+/* ==================================================
+   ZERO FRAME — DESIGN TOKENS
+   Phase 2: Complete Token System
+   ================================================== */
+
+:root {
+    /* ===== TASK 2.1 — SPACING SCALE ===== */
+    /* 8-point grid system */
+    --space-0: 0;
+    --space-1: 0.125rem;   /* 2px */
+    --space-2: 0.25rem;    /* 4px */
+    --space-3: 0.5rem;     /* 8px */
+    --space-4: 0.75rem;    /* 12px */
+    --space-5: 1rem;       /* 16px */
+    --space-6: 1.5rem;     /* 24px */
+    --space-7: 2rem;       /* 32px */
+    --space-8: 2.5rem;     /* 40px */
+    --space-9: 3rem;       /* 48px */
+    --space-10: 4rem;      /* 64px */
+    --space-11: 5rem;      /* 80px */
+    --space-12: 6rem;      /* 96px */
+    --space-13: 8rem;      /* 128px */
+    --space-14: 10rem;     /* 160px */
+    --space-15: 12rem;     /* 192px */
+    --space-16: 16rem;     /* 256px */
+
+    /* Semantic spacing aliases */
+    --space-xs: var(--space-3);
+    --space-sm: var(--space-5);
+    --space-md: var(--space-7);
+    --space-lg: var(--space-10);
+    --space-xl: var(--space-12);
+    --space-2xl: var(--space-13);
+    --space-3xl: var(--space-15);
+
+    /* ===== TASK 2.2 — FONT SCALE ===== */
+    /* Fluid typography with clamp() */
+    /* Base: 16px @ 375px → 18px @ 1440px → 20px @ 1920px */
+    --font-size-base: clamp(1rem, 1vw + 0.75rem, 1.25rem);
+    
+    /* Scale ratio: 1.25 (Major Third) */
+    --font-size-xs: clamp(0.75rem, 0.8vw + 0.5rem, 0.875rem);
+    --font-size-sm: clamp(0.875rem, 1vw + 0.6rem, 1rem);
+    --font-size-md: var(--font-size-base);
+    --font-size-lg: clamp(1.25rem, 1.5vw + 0.9rem, 1.5rem);
+    --font-size-xl: clamp(1.5rem, 2vw + 1rem, 2rem);
+    --font-size-2xl: clamp(1.875rem, 2.5vw + 1.2rem, 2.5rem);
+    --font-size-3xl: clamp(2.25rem, 3.5vw + 1.5rem, 3.5rem);
+    --font-size-4xl: clamp(3rem, 5vw + 2rem, 5rem);
+    --font-size-5xl: clamp(4rem, 7vw + 2.5rem, 7rem);
+    --font-size-6xl: clamp(5rem, 10vw + 3rem, 10rem);
+    --font-size-7xl: clamp(6rem, 12vw + 4rem, 12rem);
+
+    /* Font weights */
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+    
+    /* Line heights */
+    --line-height-none: 1;
+    --line-height-tight: 1.1;
+    --line-height-snug: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.625;
+    --line-height-loose: 2;
+
+    /* Letter spacing */
+    --tracking-tighter: -0.05em;
+    --tracking-tight: -0.02em;
+    --tracking-normal: 0;
+    --tracking-wide: 0.02em;
+    --tracking-wider: 0.05em;
+    --tracking-widest: 0.1em;
+
+    /* ===== TASK 2.3 — COLOR SYSTEM ===== */
+    /* Monochromatic — Black & White Only */
+    --color-black: #000000;
+    --color-white: #ffffff;
+    
+    /* Grayscale (for opacity variations, not as separate colors) */
+    --color-white-10: rgba(255, 255, 255, 0.1);
+    --color-white-20: rgba(255, 255, 255, 0.2);
+    --color-white-30: rgba(255, 255, 255, 0.3);
+    --color-white-40: rgba(255, 255, 255, 0.4);
+    --color-white-50: rgba(255, 255, 255, 0.5);
+    --color-white-60: rgba(255, 255, 255, 0.6);
+    --color-white-70: rgba(255, 255, 255, 0.7);
+    --color-white-80: rgba(255, 255, 255, 0.8);
+    --color-white-90: rgba(255, 255, 255, 0.9);
+    
+    --color-black-10: rgba(0, 0, 0, 0.1);
+    --color-black-20: rgba(0, 0, 0, 0.2);
+    --color-black-30: rgba(0, 0, 0, 0.3);
+    --color-black-40: rgba(0, 0, 0, 0.4);
+    --color-black-50: rgba(0, 0, 0, 0.5);
+    --color-black-60: rgba(0, 0, 0, 0.6);
+    --color-black-70: rgba(0, 0, 0, 0.7);
+    --color-black-80: rgba(0, 0, 0, 0.8);
+    --color-black-90: rgba(0, 0, 0, 0.9);
+
+    /* Semantic color aliases */
+    --color-primary: var(--color-white);
+    --color-secondary: var(--color-black);
+    --color-border: var(--color-white);
+    --color-text: var(--color-white);
+    --color-text-inverse: var(--color-black);
+    --color-background: var(--color-black);
+    --color-background-inverse: var(--color-white);
+
+    /* ===== TASK 2.4 — RADIUS SYSTEM ===== */
+    --radius-0: 0;
+    --radius-1: 0.125rem;  /* 2px */
+    --radius-2: 0.25rem;   /* 4px */
+    --radius-3: 0.5rem;    /* 8px */
+    --radius-4: 0.75rem;   /* 12px */
+    --radius-5: 1rem;      /* 16px */
+    --radius-6: 1.5rem;    /* 24px */
+    --radius-7: 2rem;      /* 32px */
+    --radius-full: 9999px;
+    
+    /* Semantic radius aliases */
+    --radius-none: var(--radius-0);
+    --radius-sm: var(--radius-1);
+    --radius-md: var(--radius-2);
+    --radius-lg: var(--radius-3);
+    --radius-xl: var(--radius-4);
+    --radius-2xl: var(--radius-5);
+    --radius-full: var(--radius-full);
+
+    /* ===== TASK 2.5 — MOTION TIMING TOKENS ===== */
+    /* Durations */
+    --duration-0: 0ms;
+    --duration-75: 75ms;
+    --duration-100: 100ms;
+    --duration-150: 150ms;
+    --duration-200: 200ms;
+    --duration-300: 300ms;
+    --duration-400: 400ms;
+    --duration-500: 500ms;
+    --duration-600: 600ms;
+    --duration-700: 700ms;
+    --duration-800: 800ms;
+    --duration-1000: 1000ms;
+    
+    /* Semantic duration aliases */
+    --duration-instant: var(--duration-0);
+    --duration-fast: var(--duration-150);
+    --duration-base: var(--duration-300);
+    --duration-slow: var(--duration-600);
+    --duration-slower: var(--duration-800);
+    
+    /* Easing curves */
+    --ease-linear: cubic-bezier(0, 0, 1, 1);
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-in-out-back: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* Custom ZERO FRAME easings */
+    --ease-reveal: cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    --ease-kinetic: cubic-bezier(0.34, 1.2, 0.64, 1);
+
+    /* ===== TYPOGRAPHY SCALE — COMPLETE ===== */
+    /* Headings */
+    --font-size-h1: var(--font-size-5xl);
+    --font-size-h2: var(--font-size-4xl);
+    --font-size-h3: var(--font-size-3xl);
+    --font-size-h4: var(--font-size-2xl);
+    --font-size-h5: var(--font-size-xl);
+    --font-size-h6: var(--font-size-lg);
+    
+    /* Body */
+    --font-size-body: var(--font-size-md);
+    --font-size-body-sm: var(--font-size-sm);
+    --font-size-body-xs: var(--font-size-xs);
+    
+    /* Special */
+    --font-size-hero: var(--font-size-7xl);
+    --font-size-meta: var(--font-size-xs);
+    --font-size-caption: var(--font-size-xs);
+    --font-size-label: var(--font-size-sm);
+
+    /* ===== LAYOUT TOKENS ===== */
+    --sidebar-width: 60px;
+    --container-padding: var(--space-lg);
+    --container-max-width: 1440px;
+    --grid-gap: var(--space-md);
+    --grid-gap-sm: var(--space-sm);
+    --grid-gap-lg: var(--space-lg);
+    
+    /* Z-INDEX LAYERS */
+    --z-negative: -1;
+    --z-elevate: 1;
+    --z-sticky: 100;
+    --z-drawer: 200;
+    --z-modal: 300;
+    --z-popover: 400;
+    --z-tooltip: 500;
+    --z-toast: 600;
+    --z-cursor: 9999;
+    
+    /* ===== BREAKPOINTS ===== */
+    --breakpoint-xs: 420px;
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+    --breakpoint-2xl: 1440px;
+    --breakpoint-3xl: 1920px;
+}
+
+/* ===== TASK 2.6 — FLUID TYPOGRAPHY IMPLEMENTATION ===== */
+/* Base body styles with fluid typography */
+html {
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-normal);
+}
+
+/* Headings with fluid scale */
+h1, .h1 {
+    font-size: var(--font-size-h1);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--tracking-tighter);
+}
+
+h2, .h2 {
+    font-size: var(--font-size-h2);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--tracking-tight);
+}
+
+h3, .h3 {
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-snug);
+    letter-spacing: var(--tracking-tight);
+}
+
+h4, .h4 {
+    font-size: var(--font-size-h4);
+    line-height: var(--line-height-snug);
+    letter-spacing: var(--tracking-normal);
+}
+
+h5, .h5 {
+    font-size: var(--font-size-h5);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--tracking-normal);
+}
+
+h6, .h6 {
+    font-size: var(--font-size-h6);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--tracking-wide);
+}
+
+/* Text utilities */
+.text-xs { font-size: var(--font-size-xs); }
+.text-sm { font-size: var(--font-size-sm); }
+.text-base { font-size: var(--font-size-base); }
+.text-lg { font-size: var(--font-size-lg); }
+.text-xl { font-size: var(--font-size-xl); }
+.text-2xl { font-size: var(--font-size-2xl); }
+.text-3xl { font-size: var(--font-size-3xl); }
+.text-4xl { font-size: var(--font-size-4xl); }
+.text-5xl { font-size: var(--font-size-5xl); }
+
+/* Line height utilities */
+.leading-none { line-height: var(--line-height-none); }
+.leading-tight { line-height: var(--line-height-tight); }
+.leading-snug { line-height: var(--line-height-snug); }
+.leading-normal { line-height: var(--line-height-normal); }
+.leading-relaxed { line-height: var(--line-height-relaxed); }
+.leading-loose { line-height: var(--line-height-loose); }
+
+/* Letter spacing utilities */
+.tracking-tighter { letter-spacing: var(--tracking-tighter); }
+.tracking-tight { letter-spacing: var(--tracking-tight); }
+.tracking-normal { letter-spacing: var(--tracking-normal); }
+.tracking-wide { letter-spacing: var(--tracking-wide); }
+.tracking-wider { letter-spacing: var(--tracking-wider); }
+.tracking-widest { letter-spacing: var(--tracking-widest); }
+
+/* Font weight utilities */
+.font-normal { font-weight: var(--font-weight-normal); }
+.font-bold { font-weight: var(--font-weight-bold); }
+
+/* ===== RESPONSIVE TYPOGRAPHY ADJUSTMENTS ===== */
+/* Task 2.7 — Testing typography responsiveness */
+/* No media queries for font sizes — all fluid via clamp() */
+/* Only structural adjustments at breakpoints */
+
+@media (max-width: 768px) {
+    :root {
+        --container-padding: var(--space-md);
+        --grid-gap: var(--grid-gap-sm);
+    }
+}
+
+@media (max-width: 640px) {
+    :root {
+        --container-padding: var(--space-sm);
+    }
+}
+
+/* Performance optimization */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* High contrast support */
+@media (prefers-contrast: high) {
+    :root {
+        --color-white: #ffffff;
+        --color-black: #000000;
+        --color-white-10: rgba(255, 255, 255, 0.3);
+        --color-black-10: rgba(0, 0, 0, 0.3);
+    }
+    
+    .graph-paper {
+        opacity: 0.3;
+    }
+}
+
+/* Dark mode (already default) */
+@media (prefers-color-scheme: light) {
+    /* ZERO FRAME is intentionally black-first */
+    /* Light mode not supported — maintains brand identity */
+    :root {
+        --color-black: #000000;
+        --color-white: #ffffff;
+    }
+}

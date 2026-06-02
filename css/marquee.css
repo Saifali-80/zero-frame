@@ -1,0 +1,124 @@
+/* ==================================================
+   ZERO FRAME — MARQUEE SYSTEM
+   Phase 7: Infinite Loop + Hover Pause + Reduced Motion
+   ================================================== */
+
+.marquee {
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: var(--space-lg) 0;
+    background: var(--color-black);
+    border-block: 1px solid var(--color-white);
+    margin-block: var(--space-xl);
+}
+
+.marquee__track {
+    display: inline-flex;
+    animation: marqueeScroll 25s linear infinite;
+}
+
+.marquee__content {
+    display: inline-flex;
+    gap: var(--space-8);
+    padding-right: var(--space-8);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: var(--font-size-sm);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+}
+
+.marquee__item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-6);
+}
+
+.marquee__item::after {
+    content: '●';
+    font-size: var(--font-size-xs);
+    opacity: 0.5;
+}
+
+.marquee:hover .marquee__track {
+    animation-play-state: paused;
+}
+
+/* Different speeds */
+.marquee--slow .marquee__track {
+    animation-duration: 40s;
+}
+
+.marquee--fast .marquee__track {
+    animation-duration: 15s;
+}
+
+/* Reverse direction */
+.marquee--reverse .marquee__track {
+    animation-direction: reverse;
+}
+
+/* Vertical marquee */
+.marquee--vertical {
+    white-space: normal;
+    height: 200px;
+}
+
+.marquee--vertical .marquee__track {
+    display: flex;
+    flex-direction: column;
+    animation: marqueeVertical 20s linear infinite;
+}
+
+@keyframes marqueeScroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes marqueeVertical {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-50%);
+    }
+}
+
+/* Multiple instances */
+.marquee-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .marquee {
+        padding: var(--space-md) 0;
+        margin-block: var(--space-lg);
+    }
+    
+    .marquee__content {
+        font-size: var(--font-size-xs);
+        gap: var(--space-6);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .marquee__track {
+        animation: none !important;
+    }
+    
+    .marquee {
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    .marquee__track {
+        display: inline-flex;
+    }
+}

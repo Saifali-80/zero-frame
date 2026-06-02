@@ -1,0 +1,424 @@
+/* ==================================================
+   ZERO FRAME — VISUAL ATMOSPHERE LAYER
+   Phase 4: Graph Paper + Radial Mask + Noise + Blend Modes
+   ================================================== */
+
+/* ============================================
+   TASK 4.1 — GRAPH-PAPER BACKGROUND
+   ============================================ */
+
+.atmosphere {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: var(--z-negative);
+    overflow: hidden;
+}
+
+/* Base graph paper — multiple grid densities */
+.graph-paper {
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-black);
+}
+
+/* Major grid lines (32px spacing) */
+.graph-paper--major {
+    background-image: 
+        linear-gradient(var(--color-white) 1px, transparent 1px),
+        linear-gradient(90deg, var(--color-white) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.12;
+}
+
+/* Minor grid lines (8px spacing) — more detail */
+.graph-paper--minor {
+    background-image: 
+        linear-gradient(var(--color-white) 0.5px, transparent 0.5px),
+        linear-gradient(90deg, var(--color-white) 0.5px, transparent 0.5px);
+    background-size: 8px 8px;
+    opacity: 0.04;
+}
+
+/* Diagonal grid for variation */
+.graph-paper--diagonal {
+    background-image: 
+        repeating-linear-gradient(45deg, var(--color-white) 0px, var(--color-white) 1px, transparent 1px, transparent 32px);
+    opacity: 0.06;
+}
+
+/* Dot grid alternative */
+.graph-paper--dots {
+    background-image: radial-gradient(var(--color-white) 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0.08;
+}
+
+/* Combined grids for depth */
+.graph-paper--layered {
+    background-image: 
+        linear-gradient(var(--color-white) 1px, transparent 1px),
+        linear-gradient(90deg, var(--color-white) 1px, transparent 1px),
+        radial-gradient(var(--color-white) 0.5px, transparent 0.5px);
+    background-size: 64px 64px, 64px 64px, 16px 16px;
+    opacity: 0.1;
+}
+
+/* Responsive grid density */
+@media (max-width: 768px) {
+    .graph-paper--major {
+        background-size: 24px 24px;
+        opacity: 0.08;
+    }
+    
+    .graph-paper--minor {
+        display: none; /* Reduce visual noise on mobile */
+    }
+}
+
+@media (max-width: 640px) {
+    .graph-paper--major {
+        background-size: 16px 16px;
+        opacity: 0.06;
+    }
+}
+
+/* ============================================
+   TASK 4.2 — RADIAL MASK
+   ============================================ */
+
+/* Radial mask — creates vignette effect */
+.radial-mask {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at 50% 40%,
+        transparent 15%,
+        var(--color-black) 75%
+    );
+    opacity: 0.85;
+}
+
+/* Radial mask variations */
+.radial-mask--center {
+    background: radial-gradient(
+        circle at center,
+        transparent 20%,
+        var(--color-black) 80%
+    );
+}
+
+.radial-mask--top {
+    background: radial-gradient(
+        ellipse at 50% 20%,
+        transparent 20%,
+        var(--color-black) 80%
+    );
+}
+
+.radial-mask--bottom {
+    background: radial-gradient(
+        ellipse at 50% 80%,
+        transparent 20%,
+        var(--color-black) 80%
+    );
+}
+
+.radial-mask--left {
+    background: radial-gradient(
+        ellipse at 20% 50%,
+        transparent 20%,
+        var(--color-black) 80%
+    );
+}
+
+.radial-mask--right {
+    background: radial-gradient(
+        ellipse at 80% 50%,
+        transparent 20%,
+        var(--color-black) 80%
+    );
+}
+
+/* Soft edge — less aggressive masking */
+.radial-mask--soft {
+    background: radial-gradient(
+        circle at 50% 40%,
+        transparent 5%,
+        var(--color-black) 95%
+    );
+    opacity: 0.7;
+}
+
+/* Hard edge — more aggressive */
+.radial-mask--hard {
+    background: radial-gradient(
+        circle at 50% 40%,
+        transparent 5%,
+        var(--color-black) 50%
+    );
+    opacity: 0.95;
+}
+
+/* Animated radial mask (subtle) */
+.radial-mask--animated {
+    animation: breathe 8s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0%, 100% {
+        background: radial-gradient(
+            circle at 50% 40%,
+            transparent 15%,
+            var(--color-black) 75%
+        );
+    }
+    50% {
+        background: radial-gradient(
+            circle at 50% 45%,
+            transparent 20%,
+            var(--color-black) 70%
+        );
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .radial-mask--animated {
+        animation: none;
+    }
+}
+
+/* ============================================
+   TASK 4.3 — NOISE LAYER
+   ============================================ */
+
+/* SVG noise texture — inline, no external file */
+.noise {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+}
+
+/* Noise density variations */
+.noise--light {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+    opacity: 0.3;
+}
+
+.noise--heavy {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.06'/%3E%3C/svg%3E");
+    opacity: 0.7;
+}
+
+/* Film grain effect */
+.noise--film {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cfilter id='filmNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23filmNoise)' opacity='0.03'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+    opacity: 0.4;
+}
+
+/* Noise that only appears on hover (interactive areas) */
+.interactive-noise:hover .noise {
+    opacity: 0.8;
+    transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+/* ============================================
+   TASK 4.4 — BLEND MODES
+   ============================================ */
+
+/* Blend mode utilities */
+.blend-normal { mix-blend-mode: normal; }
+.blend-multiply { mix-blend-mode: multiply; }
+.blend-screen { mix-blend-mode: screen; }
+.blend-overlay { mix-blend-mode: overlay; }
+.blend-darken { mix-blend-mode: darken; }
+.blend-lighten { mix-blend-mode: lighten; }
+.blend-color-dodge { mix-blend-mode: color-dodge; }
+.blend-color-burn { mix-blend-mode: color-burn; }
+.blend-hard-light { mix-blend-mode: hard-light; }
+.blend-soft-light { mix-blend-mode: soft-light; }
+.blend-difference { mix-blend-mode: difference; }
+.blend-exclusion { mix-blend-mode: exclusion; }
+
+/* Atmosphere blend mode combinations */
+.atmosphere--overlay .noise {
+    mix-blend-mode: overlay;
+}
+
+.atmosphere--multiply .noise {
+    mix-blend-mode: multiply;
+}
+
+.atmosphere--screen .noise {
+    mix-blend-mode: screen;
+    opacity: 0.3;
+}
+
+/* Text with blend mode (for ghost effects) */
+.text-blend-difference {
+    mix-blend-mode: difference;
+    color: white;
+}
+
+/* ============================================
+   TASK 4.5 — PAINT PERFORMANCE
+   ============================================ */
+
+/* Performance optimizations */
+.atmosphere,
+.graph-paper,
+.radial-mask,
+.noise {
+    will-change: auto; /* Don't force GPU for everything */
+}
+
+/* Use GPU acceleration only where needed */
+.noise {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Reduce paint complexity on mobile */
+@media (max-width: 768px) {
+    .graph-paper--minor,
+    .graph-paper--diagonal,
+    .graph-paper--dots {
+        display: none;
+    }
+    
+    .noise {
+        background-size: 100px 100px;
+        opacity: 0.3;
+    }
+    
+    .radial-mask {
+        opacity: 0.9;
+    }
+}
+
+@media (max-width: 640px) {
+    .graph-paper--major {
+        background-size: 16px 16px;
+        opacity: 0.06;
+    }
+    
+    .noise {
+        display: none; /* Remove noise on very small devices for performance */
+    }
+}
+
+/* Performance measurement indicators (dev only) */
+.performance-indicator {
+    position: fixed;
+    bottom: var(--space-sm);
+    left: var(--space-sm);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: var(--font-size-xs);
+    background: var(--color-black-80);
+    padding: var(--space-1) var(--space-2);
+    z-index: 9999;
+    pointer-events: none;
+    border-radius: var(--radius-sm);
+    opacity: 0;
+    transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.performance-indicator.visible {
+    opacity: 1;
+}
+
+/* FPS counter */
+@keyframes fps-pulse {
+    from { opacity: 1; }
+    to { opacity: 0.3; }
+}
+
+/* Reduced motion — disable all atmospheric animations */
+@media (prefers-reduced-motion: reduce) {
+    .radial-mask--animated {
+        animation: none;
+    }
+    
+    .noise {
+        animation: none;
+    }
+}
+
+/* ============================================
+   COMPLETE ATMOSPHERE COMPOSITION
+   ============================================ */
+
+/* Default atmosphere composition */
+.atmosphere-default {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.atmosphere-default .graph-paper-layer {
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(var(--color-white) 1px, transparent 1px),
+        linear-gradient(90deg, var(--color-white) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.1;
+}
+
+.atmosphere-default .radial-mask-layer {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 40%, transparent 20%, var(--color-black) 80%);
+    opacity: 0.85;
+}
+
+.atmosphere-default .noise-layer {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    mix-blend-mode: overlay;
+    opacity: 0.5;
+}
+
+/* ============================================
+   INTERACTIVE ATMOSPHERE (Optional)
+   ============================================ */
+
+/* Atmosphere responds to mouse movement */
+.atmosphere-interactive {
+    transition: opacity var(--duration-slow) var(--ease-out);
+}
+
+.atmosphere-interactive:hover .graph-paper-layer {
+    opacity: 0.15;
+    transition: opacity var(--duration-base) var(--ease-out);
+}
+
+/* Scroll-based atmosphere */
+@keyframes scrollAtmosphere {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(50%);
+    }
+}
+
+.scroll-atmosphere .graph-paper-layer {
+    animation: scrollAtmosphere 20s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scroll-atmosphere .graph-paper-layer {
+        animation: none;
+    }
+}

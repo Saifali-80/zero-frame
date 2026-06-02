@@ -1,0 +1,170 @@
+/* ==================================================
+   ZERO FRAME — HERO SECTION
+   Phase 8: Kinetic Typography + Edge Bleed + CTA
+   ================================================== */
+
+.hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow-x: clip;
+}
+
+/* Edge Bleed Hero Title */
+.hero__title {
+    font-size: var(--font-size-hero);
+    line-height: 0.85;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-md);
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* Intentional edge bleed */
+.hero__title.bleed-edge {
+    margin-left: calc(-1 * var(--container-padding));
+    margin-right: calc(-1 * var(--container-padding));
+}
+
+/* Hero subtitle */
+.hero__subtitle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: var(--font-size-lg);
+    max-width: 60ch;
+    margin-bottom: var(--space-xl);
+    opacity: 0.8;
+}
+
+/* Hero description */
+.hero__description {
+    font-size: var(--font-size-body);
+    max-width: 50ch;
+    margin-bottom: var(--space-xl);
+    opacity: 0.7;
+}
+
+/* CTA Button */
+.hero__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: var(--font-size-meta);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    padding: var(--space-3) var(--space-7);
+    border: 1px solid var(--color-white);
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.hero__cta:hover {
+    background: var(--color-white);
+    color: var(--color-black);
+    gap: var(--space-4);
+}
+
+.hero__cta::after {
+    content: '→';
+    transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.hero__cta:hover::after {
+    transform: translateX(4px);
+}
+
+/* Hero with background text */
+.hero--bg-text {
+    position: relative;
+}
+
+.hero--bg-text::before {
+    content: attr(data-bg-text);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(5rem, 20vw, 15rem);
+    opacity: 0.03;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+/* Hero indicators */
+.hero__scroll-indicator {
+    position: absolute;
+    bottom: var(--space-xl);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: var(--font-size-xs);
+    opacity: 0.5;
+    transition: opacity var(--duration-fast);
+}
+
+.hero__scroll-indicator:hover {
+    opacity: 1;
+}
+
+.hero__scroll-indicator::after {
+    content: '↓';
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(8px);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero {
+        min-height: 80vh;
+    }
+    
+    .hero__title {
+        white-space: normal;
+        word-break: break-word;
+    }
+    
+    .hero__title.bleed-edge {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .hero__subtitle {
+        font-size: var(--font-size-md);
+    }
+    
+    .hero__scroll-indicator {
+        bottom: var(--space-lg);
+    }
+}
+
+@media (max-width: 640px) {
+    .hero {
+        min-height: 70vh;
+    }
+    
+    .hero__cta {
+        padding: var(--space-2) var(--space-5);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero__scroll-indicator::after {
+        animation: none;
+    }
+    
+    .hero__cta:hover::after {
+        transform: none;
+    }
+}

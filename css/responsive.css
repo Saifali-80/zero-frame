@@ -1,0 +1,358 @@
+/* ==================================================
+   ZERO FRAME — RESPONSIVE ENGINEERING
+   Phase 13: 6 Breakpoints + Layout Adjustments
+   ================================================== */
+
+/* Breakpoint Variables */
+:root {
+    --breakpoint-xs: 420px;
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+    --breakpoint-2xl: 1440px;
+}
+
+/* ============================================
+   2XL (1440px and above)
+   ============================================ */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1280px;
+    }
+    
+    .hero__title {
+        font-size: clamp(6rem, 8vw, 12rem);
+    }
+    
+    .section {
+        padding-block: var(--space-3xl);
+    }
+}
+
+/* ============================================
+   XL (1280px to 1439px)
+   ============================================ */
+@media (max-width: 1280px) {
+    .container {
+        padding-inline: var(--space-lg);
+    }
+    
+    .work-grid-asymmetric {
+        gap: var(--space-lg);
+    }
+}
+
+/* ============================================
+   LG (1024px to 1279px)
+   ============================================ */
+@media (max-width: 1024px) {
+    .grid-12 {
+        grid-template-columns: repeat(8, 1fr);
+    }
+    
+    .hero__title {
+        font-size: clamp(4rem, 10vw, 8rem);
+    }
+    
+    .work-featured__title {
+        font-size: var(--font-size-4xl);
+    }
+    
+    .accordion__trigger {
+        font-size: var(--font-size-xl);
+    }
+}
+
+/* ============================================
+   MD (768px to 1023px) — TABLET
+   ============================================ */
+@media (max-width: 768px) {
+    /* Layout */
+    .sidebar {
+        display: none;
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+    
+    .menu-trigger {
+        display: flex;
+    }
+    
+    /* Grid */
+    .grid-12,
+    .grid-8 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    /* Spacing */
+    .section {
+        padding-block: var(--space-xl);
+    }
+    
+    .section:first-of-type {
+        padding-block-start: var(--space-2xl);
+    }
+    
+    /* Typography */
+    .hero__title {
+        font-size: clamp(3rem, 8vw, 6rem);
+        white-space: normal;
+    }
+    
+    .hero__subtitle {
+        font-size: var(--font-size-md);
+    }
+    
+    /* Work Grid */
+    .work-grid-asymmetric {
+        grid-template-columns: 1fr;
+    }
+    
+    .work-featured__description {
+        font-size: var(--font-size-md);
+    }
+    
+    .work-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Accordion */
+    .accordion-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .accordion-panel {
+        border-left: none;
+        border-top: 2px solid var(--color-white);
+        margin-top: var(--space-md);
+    }
+    
+    /* Contact */
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-cta {
+        text-align: left;
+    }
+    
+    /* Services Grid */
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Ghost Numerals */
+    .ghost-numbers {
+        font-size: clamp(2rem, 8vw, 4rem);
+        bottom: var(--space-sm);
+        right: var(--space-sm);
+    }
+    
+    /* Footer */
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-sm);
+    }
+}
+
+/* ============================================
+   SM (640px to 767px)
+   ============================================ */
+@media (max-width: 640px) {
+    /* Spacing */
+    :root {
+        --container-padding: var(--space-md);
+    }
+    
+    .section {
+        padding-block: var(--space-lg);
+    }
+    
+    /* Typography */
+    .hero__title {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+    }
+    
+    .hero__tagline {
+        font-size: var(--font-size-sm);
+    }
+    
+    .section__title {
+        font-size: var(--font-size-3xl);
+    }
+    
+    /* Work */
+    .work-featured__title {
+        font-size: var(--font-size-3xl);
+    }
+    
+    .work-item__title {
+        font-size: var(--font-size-xl);
+    }
+    
+    .work-gallery {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Accordion */
+    .accordion__trigger {
+        font-size: var(--font-size-lg);
+        padding: var(--space-md) 0;
+    }
+    
+    /* Contact */
+    .outline-cta {
+        font-size: clamp(2rem, 6vw, 3rem);
+        padding: var(--space-sm) var(--space-lg);
+        display: block;
+        text-align: center;
+    }
+    
+    /* Marquee */
+    .marquee__content {
+        font-size: var(--font-size-xs);
+        gap: var(--space-4);
+    }
+    
+    /* Cursor (disable) */
+    .cursor-dot,
+    .cursor-ring {
+        display: none;
+    }
+    
+    body {
+        cursor: auto;
+    }
+}
+
+/* ============================================
+   XS (420px to 639px)
+   ============================================ */
+@media (max-width: 420px) {
+    /* Spacing */
+    :root {
+        --container-padding: var(--space-sm);
+        --grid-gap: var(--space-sm);
+    }
+    
+    .section {
+        padding-block: var(--space-md);
+    }
+    
+    /* Typography */
+    .hero__title {
+        font-size: clamp(2rem, 5vw, 3rem);
+    }
+    
+    .hero__cta {
+        padding: var(--space-2) var(--space-5);
+        font-size: var(--font-size-xs);
+    }
+    
+    .section__title {
+        font-size: var(--font-size-2xl);
+    }
+    
+    /* Work */
+    .work-featured__title {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .work-meta-item {
+        font-size: var(--font-size-xs);
+    }
+    
+    /* Accordion */
+    .accordion__trigger {
+        font-size: var(--font-size-md);
+    }
+    
+    .accordion-panel {
+        padding: var(--space-md);
+    }
+    
+    /* Contact */
+    .contact-info__value {
+        font-size: var(--font-size-sm);
+    }
+    
+    .social-link {
+        padding: var(--space-1) var(--space-3);
+        font-size: var(--font-size-xs);
+    }
+    
+    /* Ghost Numerals */
+    .ghost-numbers {
+        display: none;
+    }
+    
+    /* Menu Trigger */
+    .menu-trigger {
+        width: 40px;
+        height: 40px;
+        top: var(--space-sm);
+        right: var(--space-sm);
+    }
+    
+    .mobile-drawer__link {
+        font-size: var(--font-size-2xl);
+    }
+}
+
+/* ============================================
+   Landscape Mode
+   ============================================ */
+@media (max-width: 900px) and (orientation: landscape) {
+    .hero {
+        min-height: auto;
+        padding-block: var(--space-2xl);
+    }
+    
+    .mobile-drawer__nav {
+        gap: var(--space-md);
+    }
+    
+    .mobile-drawer__link {
+        font-size: var(--font-size-xl);
+    }
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+    .sidebar,
+    .menu-trigger,
+    .mobile-drawer,
+    .cursor-dot,
+    .cursor-ring,
+    .visual-atmosphere,
+    .ghost-numbers,
+    .sticky-label,
+    .marquee {
+        display: none !important;
+    }
+    
+    .main-content {
+        margin-left: 0 !important;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .section {
+        border-bottom: 1px solid #ccc;
+        page-break-inside: avoid;
+    }
+    
+    a {
+        text-decoration: underline;
+        color: black;
+    }
+}

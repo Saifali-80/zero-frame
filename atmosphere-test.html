@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZERO FRAME — Atmosphere Test</title>
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/atmosphere.css">
+    
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: var(--color-black);
+            color: var(--color-white);
+            font-family: 'Barlow Condensed', sans-serif;
+        }
+        
+        .test-container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: var(--space-2xl);
+        }
+        
+        h1 {
+            font-family: 'Anton', sans-serif;
+            font-size: var(--font-size-6xl);
+            margin-bottom: var(--space-md);
+        }
+        
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-xl);
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .test-card {
+            background: var(--color-white-10);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+        }
+        
+        .test-card h3 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .status-pass {
+            color: #00ff00;
+        }
+        
+        .status-fail {
+            color: #ff0000;
+        }
+        
+        .perf-metrics {
+            position: fixed;
+            bottom: var(--space-sm);
+            right: var(--space-sm);
+            background: var(--color-black-80);
+            padding: var(--space-sm);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: var(--font-size-xs);
+            border-radius: var(--radius-sm);
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+
+<div class="atmosphere atmosphere-default" aria-hidden="true">
+    <div class="graph-paper graph-paper--major"></div>
+    <div class="graph-paper graph-paper--minor"></div>
+    <div class="graph-paper graph-paper--diagonal"></div>
+    <div class="radial-mask radial-mask--animated"></div>
+    <div class="noise noise--film"></div>
+</div>
+
+<div class="test-container">
+    <h1>Atmosphere Test</h1>
+    <p class="lead">Phase 4 — Graph Paper | Radial Mask | Noise | Blend Modes</p>
+    
+    <div class="test-grid">
+        <div class="test-card">
+            <h3>Task 4.1 — Graph Paper</h3>
+            <div id="graph-paper-test"></div>
+        </div>
+        <div class="test-card">
+            <h3>Task 4.2 — Radial Mask</h3>
+            <div id="radial-mask-test"></div>
+        </div>
+        <div class="test-card">
+            <h3>Task 4.3 — Noise Layer</h3>
+            <div id="noise-test"></div>
+        </div>
+        <div class="test-card">
+            <h3>Task 4.4 — Blend Modes</h3>
+            <div id="blend-test"></div>
+        </div>
+    </div>
+</div>
+
+<div class="perf-metrics" id="perf-metrics">
+    Loading...
+</div>
+
+<script src="js/performance.js"></script>
+
+<script>
+    // Test runner for Phase 4
+    (function() {
+        const results = {};
+        
+        // Test 4.1: Graph paper
+        const graphPaper = document.querySelector('.graph-paper');
+        results.graphPaper = !!graphPaper;
+        document.getElementById('graph-paper-test').innerHTML = results.graphPaper 
+            ? '<span class="status-pass">✓ Active</span>' 
+            : '<span class="status-fail">✗ Missing</span>';
+        
+        // Test 4.2: Radial mask
+        const radialMask = document.querySelector('.radial-mask');
+        results.radialMask = !!radialMask;
+        document.getElementById('radial-mask-test').innerHTML = results.radialMask 
+            ? '<span class="status-pass">✓ Active</span>' 
+            : '<span class="status-fail">✗ Missing</span>';
+        
+        // Test 4.3: Noise layer
+        const noise = document.querySelector('.noise');
+        results.noise = !!noise;
+        document.getElementById('noise-test').innerHTML = results.noise 
+            ? '<span class="status-pass">✓ Active</span>' 
+            : '<span class="status-fail">✗ Missing</span>';
+        
+        // Test 4.4: Blend mode
+        const noiseStyle = noise ? window.getComputedStyle(noise) : null;
+        const blendMode = noiseStyle ? noiseStyle.mixBlendMode : 'none';
+        results.blendMode = blendMode !== 'none' && blendMode !== 'normal';
+        document.getElementById('blend-test').innerHTML = results.blendMode 
+            ? `<span class="status-pass">✓ ${blendMode}</span>` 
+            : '<span class="status-fail">✗ No blend mode</span>';
+        
+        // Summary
+        const allPass = Object.values(results).every(v => v === true);
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        console.log('🎨 Phase 4 — Atmosphere Test Results');
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        console.table(results);
+        console.log(allPass ? '✅ ALL TESTS PASSED' : '❌ SOME TESTS FAILED');
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        
+        // Performance metrics display
+        const perfMetrics = document.getElementById('perf-metrics');
+        
+        if ('PerformanceObserver' in window) {
+            const paintObserver = new PerformanceObserver((list) => {
+                for (const entry of list.getEntries()) {
+                    if (entry.name === 'first-contentful-paint') {
+                        perfMetrics.innerHTML = `FCP: ${entry.startTime.toFixed(0)}ms | ✅`;
+                        if (entry.startTime > 800) {
+                            perfMetrics.innerHTML = `FCP: ${entry.startTime.toFixed(0)}ms | ⚠️ >800ms`;
+                        }
+                    }
+                }
+            });
+            paintObserver.observe({ entryTypes: ['paint'] });
+        }
+        
+        // Check for layout shifts
+        let cls = 0;
+        const clsObserver = new PerformanceObserver((list) => {
+            for (const entry of list.getEntries()) {
+                if (!entry.hadRecentInput) {
+                    cls += entry.value;
+                }
+            }
+            if (cls > 0.01) {
+                console.warn(`⚠️ CLS: ${cls.toFixed(3)}`);
+            }
+        });
+        clsObserver.observe({ entryTypes: ['layout-shift'] });
+    })();
+</script>
+</body>
+</html>
